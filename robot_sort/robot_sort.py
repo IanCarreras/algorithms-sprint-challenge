@@ -96,7 +96,21 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
+        # starting at the first position swap item none with the first item in the list
+        # move right 
+        # compare held item with item in position
+        # if held item is greater than, swap and turn on light
+        # move left
+        # can't move left swap turn off light
+        # move right
+        # if held is none or > position, swap turn on light
+        # move left
+        # if held > position 
+        # move left twice
+        # if held < position
+        # swap 
+
+
         pass
 
 
