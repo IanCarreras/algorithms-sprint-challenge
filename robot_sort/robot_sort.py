@@ -96,23 +96,65 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # starting at the first position swap item none with the first item in the list
+        # swap first element with None
+        # iterate through list while comparing
+        # pickup smaller element until can't move right
+        # move left until reach None element
+        # swap
         # move right 
-        # compare held item with item in position
-        # if held item is greater than, swap and turn on light
-        # move left
-        # can't move left swap turn off light
-        # move right
-        # if held is none or > position, swap turn on light
-        # move left
-        # if held > position 
-        # move left twice
-        # if held < position
-        # swap 
+        # repeat from iteration and comparison
+        # this process should use None as a placeholder for the next smallest element
+        # moving None through each position of the list until the robot is holding None and can't move right
+        # at which point the light turns on and the robot indicates the list is sorted
 
-
-        pass
-
+        if self.light_is_on() is True:
+            return 'list is sorted'
+        if self.compare_item() is None and self.can_move_right() is False:
+            self.set_light_on()
+            self.sort()
+        while self.light_is_on() is False:
+            # if held or front is None and can't move left
+            if self.compare_item() is None and self.can_move_left() is False:
+                self.swap_item()
+                self.move_right()
+                self.sort()
+            # if held or front is none and can move left and can move right
+            elif self.compare_item() is None and self.can_move_left() is True and self.can_move_right() is True:
+                self.swap_item()
+                self.move_right()
+                self.sort()
+            # if held > front and can move right
+            elif self.compare_item() == 1 and self.can_move_right() is True:
+                self.swap_item()
+                self.move_right()
+                self.sort()
+            # if held > front and can't move right
+            elif self.compare_item() == 1 and self.can_move_right() is False:
+                self.swap_item()
+                while self.compare_item() is not None:
+                    self.move_left()
+                self.swap_item()
+                if self.can_move_right() is True:
+                    self.move_right()
+                    self.sort()
+                elif self.can_move_right() is False:
+                    self.set_light_on()
+                    self.sort()
+            # if held is <= front and can move right
+            elif self.compare_item() == -1 or self.compare_item() == 0 and self.can_move_right() is True:
+                self.move_right()
+                self.sort()
+            # if held <= front and can't move right
+            elif self.compare_item() == -1 or self.compare_item() == 0 and self.can_move_right() is False:
+                while compare_item() is not None:
+                    self.move_left()
+                self.swap_item()
+                if self.can_move_right() is False:
+                    self.set_light_on()
+                    self.sort()
+                if self.can_move_right() is True:
+                    self.move_right()
+                    self.sort()
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
